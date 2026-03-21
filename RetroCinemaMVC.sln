@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11612.150 stable
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroCinemaDomain", "RetroCinemaDomain\RetroCinemaDomain.csproj", "{3FEB1274-7255-4581-8560-384DADD6244D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetroCinemaInfrastructure", "RetroCinemaInfrastructure\RetroCinemaInfrastructure.csproj", "{BC4ACD23-B487-4417-8539-151E0306ADBE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3FEB1274-7255-4581-8560-384DADD6244D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FEB1274-7255-4581-8560-384DADD6244D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FEB1274-7255-4581-8560-384DADD6244D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FEB1274-7255-4581-8560-384DADD6244D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC4ACD23-B487-4417-8539-151E0306ADBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC4ACD23-B487-4417-8539-151E0306ADBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC4ACD23-B487-4417-8539-151E0306ADBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC4ACD23-B487-4417-8539-151E0306ADBE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EB036341-E59B-4575-B3F7-D6BF1F5EF803}
+	EndGlobalSection
+EndGlobal
