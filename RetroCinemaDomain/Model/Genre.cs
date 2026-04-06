@@ -1,13 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace RetroCinemaDomain.Model;
-
-public partial class Genre
+namespace RetroCinemaDomain.Model
 {
-    public int Id { get; set; }
+    public partial class Genre : Entity
+    {
+        public Genre()
+        {
+            Movies = new HashSet<Movie>();
+        }
 
-    public string Name { get; set; } = null!;
+        [Required(ErrorMessage = "Поле 'Назва жанру' не повинно бути порожнім")]
+        [Display(Name = "Назва жанру")]
+        public string Name { get; set; } = null!;
 
-    public virtual ICollection<Movie> Movies { get; set; } = new List<Movie>();
+        public virtual ICollection<Movie> Movies { get; set; }
+    }
 }

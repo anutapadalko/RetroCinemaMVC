@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace RetroCinemaDomain.Model;
 
-public partial class MovieAuditLog
+public partial class MovieAuditLog : Entity
 {
-    public int Id { get; set; }
 
     public int? MovieId { get; set; }
 

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using RetroCinemaDomain.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace RetroCinemaDomain.Model;
+namespace RetroCinemaInfrastructure;
 
 public partial class RetroCinemaDbContext : DbContext
 {

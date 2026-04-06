@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace RetroCinemaDomain.Model;
 
-public partial class Ticket
+public partial class Ticket : Entity
 {
-    public int Id { get; set; }
 
     public int? SessionId { get; set; }
 
