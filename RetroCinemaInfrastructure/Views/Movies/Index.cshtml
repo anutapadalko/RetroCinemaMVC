@@ -81,3 +81,71 @@
 }
     </tbody>
 </table>
+<hr />
+<div class="row mt-5">
+    <div class="col-md-6">
+        <h4 class="text-center">Стрічки за роками</h4>
+        <div id="moviesByYearChart" style="width: 100%; height: 400px;"></div>
+    </div>
+    <div class="col-md-6">
+        <h4 class="text-center">Завантаженість залів (кількість сеансів)</h4>
+        <div id="sessionsByHallChart" style="width: 100%; height: 400px;"></div>
+    </div>
+</div>
+@section Scripts {
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(drawAllCharts);
+
+        function drawAllCharts() {
+        drawMoviesByYearChart();
+        drawSessionsByHallChart();
+        }
+
+        function drawMoviesByYearChart() {
+        fetch('/api/charts/moviesByYear')
+        .then(response => response.json())
+        .then(data => {
+        const dataTable = new google.visualization.DataTable();
+        dataTable.addColumn('string', 'Рік');
+        dataTable.addColumn('number', 'Кількість фільмів');
+
+        data.forEach(item => {
+        dataTable.addRow([item.label, item.count]);
+        });
+
+        const options = {
+        title: 'Стрічки за роками випуску',
+        legend: { position: 'none' },
+        colors: ['#4e73df']
+        };
+
+        const chart = new google.visualization.ColumnChart(document.getElementById('moviesByYearChart'));
+        chart.draw(dataTable, options);
+        });
+        }
+
+        function drawSessionsByHallChart() {
+        fetch('/api/charts/sessionsByHall')
+        .then(response => response.json())
+        .then(data => {
+        const dataTable = new google.visualization.DataTable();
+        dataTable.addColumn('string', 'Зал');
+        dataTable.addColumn('number', 'Кількість сеансів');
+
+        data.forEach(item => {
+        dataTable.addRow([item.label, item.count]);
+        });
+
+        const options = {
+        title: 'Розподіл сеансів по залах',
+        pieHole: 0.4 
+        };
+
+        const chart = new google.visualization.PieChart(document.getElementById('sessionsByHallChart'));
+        chart.draw(dataTable, options);
+        });
+        }
+    </script>
+}
