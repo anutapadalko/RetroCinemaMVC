@@ -9,6 +9,8 @@ builder.Services.AddDbContext<RetroCinemaDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
 
+builder.Services.AddScoped<RetroCinemaInfrastructure.Services.IDataPortServiceFactory<RetroCinemaDomain.Model.Genre>, RetroCinemaInfrastructure.Services.GenreDataPortServiceFactory>();
+
 var app = builder.Build();
 
 

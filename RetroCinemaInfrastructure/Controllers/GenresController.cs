@@ -13,10 +13,12 @@ namespace RetroCinemaInfrastructure.Controllers
     public class GenresController : Controller
     {
         private readonly RetroCinemaDbContext _context;
+        private readonly Services.IDataPortServiceFactory<Genre> _factory;
 
-        public GenresController(RetroCinemaDbContext context)
+        public GenresController(RetroCinemaDbContext context, Services.IDataPortServiceFactory<Genre> factory)
         {
             _context = context;
+            _factory = factory;
         }
 
         // GET: Genres
@@ -152,6 +154,41 @@ namespace RetroCinemaInfrastructure.Controllers
         private bool GenreExists(int id)
         {
             return _context.Genres.Any(e => e.Id == id);
+        }
+
+        [HttpGet]
+        public IActionResult Import()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Import(IFormFile fileExcel, CancellationToken cancellationToken = default)
+        {
+            if (fileExcel == null || fileExcel.Length == 0) return RedirectToAction(nameof(Index));
+
+            var importService = _factory.GetImportService(fileExcel.ContentType);
+            using var stream = fileExcel.OpenReadStream();
+            await importService.ImportFromStreamAsync(stream, cancellationToken);
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Export([FromQuery] string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", CancellationToken cancellationToken = default)
+        {
+            var exportService = _factory.GetExportService(contentType);
+            var memoryStream = new MemoryStream();
+
+            await exportService.WriteToAsync(memoryStream, cancellationToken);
+            await memoryStream.FlushAsync(cancellationToken);
+            memoryStream.Position = 0;
+
+            return new FileStreamResult(memoryStream, contentType)
+            {
+                FileDownloadName = $"genres_{DateTime.UtcNow.ToShortDateString()}.xlsx"
+            };
         }
     }
 }

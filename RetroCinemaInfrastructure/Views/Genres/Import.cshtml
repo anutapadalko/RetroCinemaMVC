@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Імпорт Жанрів та Фільмів";
+}
+
+<h1>Імпорт даних з Excel</h1>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Import" method="post" enctype="multipart/form-data">
+            <div class="form-group mb-3">
+                <label class="control-label">Оберіть Excel-файл (.xlsx):</label>
+                <input type="file" name="fileExcel" class="form-control" accept=".xlsx" required />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Завантажити</button>
+                <a asp-action="Index" class="btn btn-secondary">Повернутися до списку</a>
+            </div>
+        </form>
+    </div>
+</div>
