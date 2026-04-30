@@ -27,6 +27,26 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
+                    <div class="d-flex align-items-center">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <span class="me-3">Привіт, @User.Identity.Name!</span>
+                            <form method="post" asp-controller="Account" asp-action="Logout" class="m-0">
+                                <input type="submit" value="Вихід" class="btn btn-outline-danger btn-sm" />
+                            </form>
+                        }
+                        else
+                        {
+                            <a asp-controller="Account" asp-action="Login" class="btn btn-primary btn-sm me-2">Вхід</a>
+                            <a asp-controller="Account" asp-action="Register" class="btn btn-secondary btn-sm">Реєстрація</a>
+                        }
+                    </div>
+                    @if (User.IsInRole("admin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="Roles" asp-action="UserList">Користувачі</a>
+                        </li>
+                    }
                 </div>
             </div>
         </nav>

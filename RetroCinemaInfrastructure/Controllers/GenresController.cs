@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RetroCinemaDomain.Model;
 using RetroCinemaInfrastructure;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RetroCinemaInfrastructure.Controllers
 {
+    [Authorize(Roles = "admin, user")]
     public class GenresController : Controller
     {
         private readonly RetroCinemaDbContext _context;
